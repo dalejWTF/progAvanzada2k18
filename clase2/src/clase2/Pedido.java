@@ -3,29 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cllase2;
+package clase2;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author dalejwtf
  */
 public class Pedido {
-    private Producto cantidad[];
+    private Cliente cliente;
+    private ArrayList<Producto> cantidad;
     private String fechaEmision;
 
-    public Pedido(Producto[] cantidad, String fechaEmision) {
+    public Pedido(){}
+
+    public Pedido(Cliente cliente, ArrayList<Producto> cantidad, String fechaEmision) {
+        this.cliente = cliente;
         this.cantidad = cantidad;
         this.fechaEmision = fechaEmision;
     }
+   
 
-    public Producto[] getCantidad() {
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public ArrayList<Producto> getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Producto[] cantidad) {
+    public void setCantidad(ArrayList<Producto> cantidad) {
         this.cantidad = cantidad;
     }
 
+    
     public String getFechaEmision() {
         return fechaEmision;
     }

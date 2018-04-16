@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cllase2;
+package clase2;
 
 import java.util.Scanner;
 
@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class Cliente {
     private String nombres;
+    private String apellidos;
     private String identificacion;
     private String fecha;
     private String genero;
@@ -20,13 +21,23 @@ public class Cliente {
     private String contrasena;
     
     public Cliente(){}
-    public Cliente(String nombres, String identificacion, String fecha, String genero, String usuario, String contrasena) {
+
+    public Cliente(String nombres, String apellidos, String identificacion, String fecha, String genero, String usuario, String contrasena) {
         this.nombres = nombres;
+        this.apellidos = apellidos;
         this.identificacion = identificacion;
         this.fecha = fecha;
         this.genero = genero;
         this.usuario = usuario;
         this.contrasena = contrasena;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getNombres() {
@@ -91,6 +102,7 @@ public class Cliente {
         int bandera;
         if (usuario.equalsIgnoreCase(getUsuario())) {
             System.out.println("Usuario Encontrado");
+            
             bandera=1;
         }
         else{
@@ -99,7 +111,8 @@ public class Cliente {
         return bandera;
     }
     
-    public void editar(){
-        
+    @Override
+    public String toString(){
+        return String.format("%s %s %s", getNombres(),getApellidos(),getUsuario());
     }
 }

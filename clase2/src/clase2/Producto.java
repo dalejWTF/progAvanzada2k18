@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cllase2;
+package clase2;
 
 /**
  *
@@ -13,12 +13,23 @@ public class Producto {
     private int id;
     private String nombre;
     private double costo;
+    private int stock;
 
-    public Producto(int id, String nombre, double costo) {
+    public Producto(int id, String nombre, double costo, int stock) {
         this.id = id;
         this.nombre = nombre;
         this.costo = costo;
+        this.stock = stock;
     }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
 
     public int getId() {
         return id;
@@ -44,8 +55,12 @@ public class Producto {
         this.costo = costo;
     }
     
-    public void obtenerPrecio(){
-        
+    public double obtenerPrecio(){
+        return this.costo*this.getStock();
+    }
+    @Override
+    public String toString(){
+        return String.format("%3d %20s %10d %10.2f",getId(),getNombre(),getStock(),getCosto());
     }
     
 }
