@@ -113,6 +113,6 @@ public class Cliente {
     
     @Override
     public String toString(){
-        return String.format("%s %s %s", getNombres(),getApellidos(),getUsuario());
+        return String.format("%10s %10s %10s", getNombres(),getApellidos(),getUsuario());
     }
 }
