@@ -35,12 +35,12 @@ public class Encriptador {
     }
     
     public int encriptar(){
-        if ("Multiplicar".equals(getAlgoritmo().getClass().getSimpleName())) {
+        if (getAlgoritmo() instanceof Multiplicar) {
             Multiplicar m=(Multiplicar) getAlgoritmo();
             m=new Multiplicar(getNumero());
             return (int) m.encriptar();
             
-        }else if ("Diferencia".equals(getAlgoritmo().getClass().getSimpleName())){
+        }else if (getAlgoritmo() instanceof Diferencia){
             Diferencia d=(Diferencia) getAlgoritmo();
             d=new Diferencia(getNumero());
             return (int) d.encriptar();
@@ -55,12 +55,12 @@ public class Encriptador {
     
     public int desencriptar(){
      
-        if ("Multiplicar".equals(getAlgoritmo().getClass().getSimpleName())) {
+        if (getAlgoritmo() instanceof Multiplicar) {
             Multiplicar m=(Multiplicar) getAlgoritmo();
             m=new Multiplicar(getNumero());
             return (int) m.desencriptar();
             
-        }else if ("Diferencia".equals(getAlgoritmo().getClass().getSimpleName())){
+        }else if (getAlgoritmo() instanceof Diferencia){
             Diferencia d=(Diferencia) getAlgoritmo();
             d=new Diferencia(getNumero());
             return (int) d.desencriptar();
@@ -68,7 +68,7 @@ public class Encriptador {
         }else{
             XOR x=(XOR) getAlgoritmo();
             x=new XOR(getNumero());
-            return (int) x.encriptar();
+            return (int) x.desencriptar();
         }
     }
     

@@ -43,7 +43,6 @@ public class Multiplicar implements Algoritmo {
 
     @Override
     public double desencriptar() {
-        System.out.println(getNum());
         return getNumero();
     }
 

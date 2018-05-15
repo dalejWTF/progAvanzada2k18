@@ -16,12 +16,12 @@ public class Principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int num=5;
+        int num=20;
         Multiplicar multiplicar= new Multiplicar();
         Diferencia diferencia= new Diferencia();
         XOR xor = new XOR();
         
-        Encriptador encriptador= new Encriptador(num, multiplicar);
+        Encriptador encriptador= new Encriptador(num, xor); 
         System.out.println("numero a encriptar: "+num);
         System.out.println("numero encriptado: "+encriptador.encriptar());
         System.out.println("numero desencriptado: "+encriptador.desencriptar());

@@ -36,16 +36,23 @@ public class XOR implements Algoritmo {
 
     @Override
     public double encriptar() {
-        boolean val = (getNumero() != 0);
+        int digito;
+        int binario = 0;
+        int exp = 0;
+        while (numero != 0) {
 
-        if (val == true) {
-            System.out.println("El numero ha sido encriptado: " + val);
+            digito = numero % 2;
+            binario = (int) (binario + digito * Math.pow(10, exp));
+            exp++;
+            numero = numero / 2;
         }
-        return 1;
+        numero=binario;
+        return getNumero();
     }
 
     @Override
     public double desencriptar() {
+
         return getNumero();
     }
 
