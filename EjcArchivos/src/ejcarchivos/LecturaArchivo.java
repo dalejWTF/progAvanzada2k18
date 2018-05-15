@@ -37,9 +37,9 @@ public class LecturaArchivo {
         } catch (ClassNotFoundException e) {
             System.err.println("Clase no Encontrada");
         }catch( FileNotFoundException f){
-            System.out.println("Archivo no encontrado");
+            System.err.println("Archivo no encontrado");
         }catch(IOException io){
-            
+            System.err.checkError();
             
         }
         return emp;
