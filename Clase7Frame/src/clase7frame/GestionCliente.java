@@ -5,6 +5,12 @@
  */
 package clase7frame;
 
+import java.io.File;
+import java.nio.file.FileSystems;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 /**
@@ -12,14 +18,33 @@ import javax.swing.JComboBox;
  * @author dalejwtf
  */
 public class GestionCliente extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form GestionCliente
      */
+    public String[] DevolverProvincias() {
+        ArrayList<String> l = new ArrayList<>();
+        try {
+            Scanner tugfa = new Scanner(new File("provincias.txt"));
+            while (tugfa.hasNextLine()) {
+                String cadena = tugfa.nextLine();
+                ArrayList<String> x = new ArrayList<>(Arrays.asList(cadena.split("/n")));
+                String a = x.get(0);
+                l.add(a);
+            }
+            
+        } catch (Exception e) {
+        }
+        String[] arrStrings = new String[l.size()];
+        for (int i = 0; i < l.size(); i++) {
+            arrStrings[i] = l.get(i);
+        }
+        return arrStrings;
+    }
     
     public GestionCliente() {
         initComponents();
-        
+        cmbProvinciaResidencia.setModel(new DefaultComboBoxModel());
     }
 
     /**
@@ -112,22 +137,24 @@ public class GestionCliente extends javax.swing.JFrame {
             jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnTrabajoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnTrabajoLayout.createSequentialGroup()
-                        .addComponent(lblNumeroResidencia1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNroResidenciaTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCalleTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpnTrabajoLayout.createSequentialGroup()
                         .addGroup(jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblProvincia1)
                             .addComponent(lblCanton1)
-                            .addComponent(lblCalle1))
-                        .addGap(76, 76, 76)
-                        .addGroup(jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCalleTrabajo, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                            .addComponent(txtCantonTrabajo)
-                            .addComponent(cmbProvinciaTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                            .addComponent(lblCalle1)
+                            .addComponent(lblNumeroResidencia1))
+                        .addGroup(jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpnTrabajoLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(txtNroResidenciaTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnTrabajoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbProvinciaTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCantonTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jpnTrabajoLayout.setVerticalGroup(
             jpnTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,21 +217,17 @@ public class GestionCliente extends javax.swing.JFrame {
             .addGroup(jpnResidenciaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnResidenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnResidenciaLayout.createSequentialGroup()
-                        .addComponent(lblNumeroResidencia2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNroResidenciaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpnResidenciaLayout.createSequentialGroup()
-                        .addGroup(jpnResidenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblProvincia2)
-                            .addComponent(lblCanton2)
-                            .addComponent(lblCalle2))
-                        .addGap(76, 76, 76)
-                        .addGroup(jpnResidenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCalleResidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                            .addComponent(txtCantonResidencia)
-                            .addComponent(cmbProvinciaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                    .addComponent(lblProvincia2)
+                    .addComponent(lblCanton2)
+                    .addComponent(lblCalle2)
+                    .addComponent(lblNumeroResidencia2))
+                .addGap(24, 24, 24)
+                .addGroup(jpnResidenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbProvinciaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCalleResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNroResidenciaResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCantonResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jpnResidenciaLayout.setVerticalGroup(
             jpnResidenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +405,7 @@ public class GestionCliente extends javax.swing.JFrame {
 
     private void cmbProvinciaResidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProvinciaResidenciaActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_cmbProvinciaResidenciaActionPerformed
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
@@ -394,7 +417,10 @@ public class GestionCliente extends javax.swing.JFrame {
         this.txtNroResidenciaResidencia.setEnabled(true);
         this.cmbProvinciaResidencia.setEnabled(true);
         this.btnGuardar.setEnabled(true);
+        String[] s = this.DevolverProvincias();
+        cmbProvinciaResidencia.setModel(new DefaultComboBoxModel(s));
         
+
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed

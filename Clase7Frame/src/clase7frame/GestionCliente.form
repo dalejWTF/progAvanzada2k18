@@ -163,27 +163,31 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNumeroResidencia1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtNroResidenciaTrabajo" min="-2" pref="151" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txtCalleTrabajo" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblProvincia1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblCanton1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblCalle1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNumeroResidencia1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtCalleTrabajo" pref="151" max="32767" attributes="0"/>
-                                  <Component id="txtCantonTrabajo" max="32767" attributes="0"/>
-                                  <Component id="cmbProvinciaTrabajo" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="txtNroResidenciaTrabajo" min="-2" pref="151" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cmbProvinciaTrabajo" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtCantonTrabajo" min="-2" pref="151" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                      <EmptySpace pref="67" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -301,26 +305,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNumeroResidencia2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtNroResidenciaResidencia" min="-2" pref="151" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblProvincia2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCanton2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCalle2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtCalleResidencia" alignment="0" pref="151" max="32767" attributes="0"/>
-                                  <Component id="txtCantonResidencia" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cmbProvinciaResidencia" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="lblProvincia2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCanton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCalle2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNumeroResidencia2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cmbProvinciaResidencia" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCalleResidencia" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="txtNroResidenciaResidencia" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="txtCantonResidencia" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="67" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
