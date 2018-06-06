@@ -17,7 +17,8 @@ import javax.swing.JOptionPane;
  *
  * @author dalejwtf
  */
-public class ControlProducto implements ActionListener{
+public class ControlProducto implements ActionListener {
+
     private Producto producto;
     private ManejadorProducto manejadorProducto;
     private frmProducto fProducto;
@@ -26,7 +27,7 @@ public class ControlProducto implements ActionListener{
         this.producto = pro;
         this.manejadorProducto = manejadorProducto;
         this.fProducto = fProducto;
-        
+
         this.fProducto.btnGuardar.addActionListener(this);
         this.fProducto.btnBuscar.addActionListener(this);
         this.fProducto.btnEliminar.addActionListener(this);
@@ -57,46 +58,72 @@ public class ControlProducto implements ActionListener{
         this.fProducto = fProducto;
     }
 
-    public void Iniciar(){
-       this.fProducto.setTitle("Gestion de Productos");
-       this.fProducto.setLocationRelativeTo(null);
+    public void Iniciar() {
+        this.fProducto.setTitle("Gestion de Productos");
+        this.fProducto.setLocationRelativeTo(null);
     }
-    
+
     @Override
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource()==this.fProducto.btnGuardar) {
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.fProducto.btnGuardar) {
             this.producto.setCodigo(this.fProducto.txtCodigo.getText());
             this.producto.setNombre(this.fProducto.txtNombre.getText());
             this.producto.setPrecio(Double.parseDouble(this.fProducto.txtPrecio.getText()));
             this.producto.setCantidad(Integer.parseInt(this.fProducto.txtCantidad.getText()));
-            if(this.manejadorProducto.Guardar(producto)){
+            if (this.manejadorProducto.Guardar(producto)) {
                 JOptionPane.showMessageDialog(null, "Registro Guardado!");
                 Limpiar();
-            }else
+            } else {
                 JOptionPane.showMessageDialog(null, "No se pudo guardar el producto!");
+            }
         }
-        
-        if (e.getSource()==this.fProducto.btnBuscar) {
-            Producto busquedaProducto=manejadorProducto.Buscar(fProducto.txtCodigo.getText());
-            if (busquedaProducto!=null) {
+
+        if (e.getSource() == this.fProducto.btnBuscar) {
+            producto = manejadorProducto.Buscar(fProducto.txtCodigo.getText());
+
+            if (producto != null) {
                 Limpiar();
                 JOptionPane.showMessageDialog(null, "Producto encontrado!!");
-                fProducto.txtCodigo.setText(busquedaProducto.getCodigo());
-                fProducto.txtNombre.setText(busquedaProducto.getNombre());
-                fProducto.txtPrecio.setText(Double.toString(busquedaProducto.getPrecio()));
-                fProducto.txtCantidad.setText(Integer.toString(busquedaProducto.getCantidad()));
-            }else{
+                fProducto.txtCodigo.setText(producto.getCodigo());
+                fProducto.txtNombre.setText(producto.getNombre());
+                fProducto.txtPrecio.setText(Double.toString(producto.getPrecio()));
+                fProducto.txtCantidad.setText(Integer.toString(producto.getCantidad()));
+                fProducto.txtId.setText(Integer.toString(producto.getId()));
+            } else {
                 JOptionPane.showMessageDialog(null, "Producto no Encontrado!");
                 Limpiar();
             }
-            
+
         }
+
+        if (e.getSource() == this.fProducto.btnModificar) {
+            this.producto.setCodigo(this.fProducto.txtCodigo.getText());
+            this.producto.setNombre(this.fProducto.txtNombre.getText());
+            this.producto.setPrecio(Double.parseDouble(this.fProducto.txtPrecio.getText()));
+            this.producto.setCantidad(Integer.parseInt(this.fProducto.txtCantidad.getText()));
+            this.producto.setId(Integer.parseInt(fProducto.txtId.getText()));
+            if(this.manejadorProducto.Editar(producto)){
+                JOptionPane.showMessageDialog(null, "Registro Modificado!");
+                Limpiar();
+            }else
+                JOptionPane.showMessageDialog(null, "No se pudo modificar el producto!");
+        }
+        
+        if (e.getSource()== this.fProducto.btnEliminar) {
+            if (this.manejadorProducto.Eliminar(this.producto.getId())) {
+                JOptionPane.showMessageDialog(null, "Registro Eliminado!");
+                Limpiar();
+            }else
+                JOptionPane.showMessageDialog(null, "No se pudo Eliminar el producto!");
+        }
+
     }
-    
-    public void Limpiar(){
+
+    public void Limpiar() {
         this.fProducto.txtCodigo.setText(null);
         this.fProducto.txtNombre.setText(null);
         this.fProducto.txtPrecio.setText(null);
         this.fProducto.txtCantidad.setText(null);
+        this.fProducto.txtId.setText(null);
     }
 }

@@ -24,6 +24,7 @@ public class MVCProductos {
         Producto producto= new Producto();
         ManejadorProducto manejadorProducto= new ManejadorProducto();
         frmProducto fProducto= new frmProducto();
+        fProducto.setTitle("Ventana de Ventas");
         ControlProducto controlProducto= new ControlProducto(producto, manejadorProducto, fProducto);
         fProducto.setVisible(true);
     }

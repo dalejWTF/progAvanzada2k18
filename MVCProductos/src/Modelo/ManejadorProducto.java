@@ -16,7 +16,7 @@ import java.sql.Statement;
  * @author dalejwtf
  */
 public class ManejadorProducto extends Conexion {
-    
+    public static int id;
     public boolean Guardar(Producto producto){
         PreparedStatement ps=null;
         String sql="INSERT INTO productos (codigo,nombre,precio,cantidad) VALUES (?,?,?,?)";
@@ -60,6 +60,7 @@ public class ManejadorProducto extends Conexion {
                 double precio=resultado.getDouble("precio");
                 int cantidad=resultado.getInt("cantidad");
                 busqueda= new Producto(codigo, nombre, precio, cantidad);
+                busqueda.setId(resultado.getInt("id"));
             }
 
         } catch (SQLException e) {
@@ -74,5 +75,50 @@ public class ManejadorProducto extends Conexion {
         
         return busqueda;
     }
-
+    
+    public boolean Editar(Producto producto){
+        PreparedStatement ps=null;
+        String sql="UPDATE productos SET codigo = ? , nombre = ? , precio = ? , cantidad = ? WHERE id = ?";
+        Connection con= getConnection();
+        try {
+            ps= con.prepareStatement(sql);
+            ps.setString(1, producto.getCodigo());
+            ps.setString(2, producto.getNombre());
+            ps.setDouble(3, producto.getPrecio());
+            ps.setInt(4, producto.getCantidad());
+            ps.setInt(5, producto.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getErrorCode());
+            }
+        }
+    }
+    
+    public boolean Eliminar(int id){
+        PreparedStatement ps=null;
+        String sql="DELETE FROM productos WHERE id = ?";
+        Connection con= getConnection();
+        try {
+            ps= con.prepareStatement(sql);
+            ps.setInt(1,id);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getErrorCode());
+            }
+        }
+    }
 }
