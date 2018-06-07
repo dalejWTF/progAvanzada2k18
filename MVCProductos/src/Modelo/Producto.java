@@ -5,23 +5,33 @@
  */
 package Modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author dalejwtf
  */
 public class Producto {
+
     private String codigo;
     private String nombre;
     private double precio;
     private int cantidad;
-    private static int id=0;
+    private java.util.Date date;
+    private java.sql.Date sqlDate;
     
-    public Producto(){}
-    public Producto(String codigo, String nombre, double precio, int cantidad) {
+    
+    private static int id = 0;
+
+    public Producto() {
+    }
+
+    public Producto(String codigo, String nombre, double precio, int cantidad, Date date ) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.date=date;
     }
 
     public String getCodigo() {
@@ -55,12 +65,29 @@ public class Producto {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    public void setId(int id){
-        this.id=id;
+
+    public void setId(int id) {
+        this.id = id;
     }
-    
-    public int getId(){
+
+    public int getId() {
         return id;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public java.sql.Date getSqlDate() {
+        return sqlDate;
+    }
+
+    public void setSqlDate(Date sqlDate) {
+        this.sqlDate = new java.sql.Date(sqlDate.getTime());
+    }
+    
 }

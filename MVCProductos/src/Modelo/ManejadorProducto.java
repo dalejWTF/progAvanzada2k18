@@ -6,6 +6,7 @@
 package Modelo;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class ManejadorProducto extends Conexion {
     public static int id;
     public boolean Guardar(Producto producto){
         PreparedStatement ps=null;
-        String sql="INSERT INTO productos (codigo,nombre,precio,cantidad) VALUES (?,?,?,?)";
+        String sql="INSERT INTO productos (codigo,nombre,precio,cantidad,fechaRegistro) VALUES (?,?,?,?,?)";
         Connection con= getConnection();
         try {
             ps= con.prepareStatement(sql);
@@ -27,6 +28,7 @@ public class ManejadorProducto extends Conexion {
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getCantidad());
+            ps.setDate(5, producto.getSqlDate());
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -59,7 +61,8 @@ public class ManejadorProducto extends Conexion {
                 String nombre=resultado.getString("nombre");
                 double precio=resultado.getDouble("precio");
                 int cantidad=resultado.getInt("cantidad");
-                busqueda= new Producto(codigo, nombre, precio, cantidad);
+                java.util.Date date= new Date(resultado.getDate("fechaRegistro").getTime());
+                busqueda= new Producto(codigo, nombre, precio, cantidad, date);
                 busqueda.setId(resultado.getInt("id"));
             }
 
@@ -78,7 +81,7 @@ public class ManejadorProducto extends Conexion {
     
     public boolean Editar(Producto producto){
         PreparedStatement ps=null;
-        String sql="UPDATE productos SET codigo = ? , nombre = ? , precio = ? , cantidad = ? WHERE id = ?";
+        String sql="UPDATE productos SET codigo = ? , nombre = ? , precio = ? , cantidad = ? , fechaRegistro= ? WHERE id = ?";
         Connection con= getConnection();
         try {
             ps= con.prepareStatement(sql);
@@ -86,7 +89,8 @@ public class ManejadorProducto extends Conexion {
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getCantidad());
-            ps.setInt(5, producto.getId());
+            ps.setDate(5, producto.getSqlDate());
+            ps.setInt(6, producto.getId());
             ps.executeUpdate();
             return true;
         } catch (Exception e) {

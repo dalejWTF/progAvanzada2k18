@@ -70,6 +70,9 @@ public class ControlProducto implements ActionListener {
             this.producto.setNombre(this.fProducto.txtNombre.getText());
             this.producto.setPrecio(Double.parseDouble(this.fProducto.txtPrecio.getText()));
             this.producto.setCantidad(Integer.parseInt(this.fProducto.txtCantidad.getText()));
+            this.producto.setDate(this.fProducto.jdcFechaRegistro.getDate());
+            this.producto.setSqlDate(this.producto.getDate());
+            
             if (this.manejadorProducto.Guardar(producto)) {
                 JOptionPane.showMessageDialog(null, "Registro Guardado!");
                 Limpiar();
@@ -80,7 +83,7 @@ public class ControlProducto implements ActionListener {
 
         if (e.getSource() == this.fProducto.btnBuscar) {
             producto = manejadorProducto.Buscar(fProducto.txtCodigo.getText());
-
+            
             if (producto != null) {
                 Limpiar();
                 JOptionPane.showMessageDialog(null, "Producto encontrado!!");
@@ -89,6 +92,7 @@ public class ControlProducto implements ActionListener {
                 fProducto.txtPrecio.setText(Double.toString(producto.getPrecio()));
                 fProducto.txtCantidad.setText(Integer.toString(producto.getCantidad()));
                 fProducto.txtId.setText(Integer.toString(producto.getId()));
+                fProducto.jdcFechaRegistro.setDate(producto.getDate());
             } else {
                 JOptionPane.showMessageDialog(null, "Producto no Encontrado!");
                 Limpiar();
@@ -102,6 +106,8 @@ public class ControlProducto implements ActionListener {
             this.producto.setPrecio(Double.parseDouble(this.fProducto.txtPrecio.getText()));
             this.producto.setCantidad(Integer.parseInt(this.fProducto.txtCantidad.getText()));
             this.producto.setId(Integer.parseInt(fProducto.txtId.getText()));
+            this.producto.setDate(this.fProducto.jdcFechaRegistro.getDate());
+            this.producto.setSqlDate(this.producto.getDate());
             if(this.manejadorProducto.Editar(producto)){
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
                 Limpiar();
@@ -125,5 +131,6 @@ public class ControlProducto implements ActionListener {
         this.fProducto.txtPrecio.setText(null);
         this.fProducto.txtCantidad.setText(null);
         this.fProducto.txtId.setText(null);
+        this.fProducto.jdcFechaRegistro.setDate(null);
     }
 }
