@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import Controlador.ControlProducto;
+import java.awt.event.MouseEvent;
+import java.sql.Date;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author dalejwtf
@@ -14,6 +19,7 @@ public class frmProducto extends javax.swing.JFrame {
     /**
      * Creates new form frmProducto
      */
+    MouseEvent e=null;
     public frmProducto() {
         initComponents();
     }
@@ -40,12 +46,10 @@ public class frmProducto extends javax.swing.JFrame {
         btnModificar = new javax.swing.JToggleButton();
         btnEliminar = new javax.swing.JToggleButton();
         btnBuscar = new javax.swing.JToggleButton();
-        jLabel5 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jdcFechaRegistro = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtableDBProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,22 +75,14 @@ public class frmProducto extends javax.swing.JFrame {
 
         btnBuscar.setText("Buscar");
 
-        jLabel5.setText("ID");
-
-        txtId.setEditable(false);
-
         jLabel6.setText("Fecha Registro");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtableDBProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Codigo", "Nombre", "Precio", "Cantidad", "Fecha Registro"
+                "Codigo", "Nombre", "Precio", "Cantidad", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -97,7 +93,12 @@ public class frmProducto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jtableDBProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtableDBProductosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtableDBProductos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,9 +108,7 @@ public class frmProducto extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
+                        .addComponent(jLabel6)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,9 +119,7 @@ public class frmProducto extends javax.swing.JFrame {
                         .addGap(68, 68, 68)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -144,11 +141,7 @@ public class frmProducto extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(64, 64, 64)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,6 +195,21 @@ public class frmProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
 
+    private void jtableDBProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableDBProductosMouseClicked
+        // TODO add your handling code here:
+        int row = jtableDBProductos.rowAtPoint(evt.getPoint());
+        e=evt;
+        
+        txtCodigo.setText(jtableDBProductos.getValueAt(row, 0).toString());
+        txtNombre.setText(jtableDBProductos.getValueAt(row, 1).toString());
+        txtPrecio.setText(jtableDBProductos.getValueAt(row, 2).toString());
+        txtCantidad.setText(jtableDBProductos.getValueAt(row, 3).toString());        
+        jdcFechaRegistro.setDate((java.util.Date) jtableDBProductos.getValueAt(row, 4));
+    }//GEN-LAST:event_jtableDBProductosMouseClicked
+
+    public MouseEvent getEvent(){
+        return  e;
+    }
     /**
      * @param args the command line arguments
      */
@@ -247,15 +255,13 @@ public class frmProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
     public com.toedter.calendar.JDateChooser jdcFechaRegistro;
+    public javax.swing.JTable jtableDBProductos;
     public javax.swing.JTextField txtCantidad;
     public javax.swing.JTextField txtCodigo;
-    public javax.swing.JTextField txtId;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables

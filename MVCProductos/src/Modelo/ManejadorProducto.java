@@ -11,19 +11,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
  * @author dalejwtf
  */
 public class ManejadorProducto extends Conexion {
+
     public static int id;
-    public boolean Guardar(Producto producto){
-        PreparedStatement ps=null;
-        String sql="INSERT INTO productos (codigo,nombre,precio,cantidad,fechaRegistro) VALUES (?,?,?,?,?)";
-        Connection con= getConnection();
+
+    public boolean Guardar(Producto producto) {
+        PreparedStatement ps = null;
+        String sql = "INSERT INTO productos (codigo,nombre,precio,cantidad,fechaRegistro) VALUES (?,?,?,?,?)";
+        Connection con = getConnection();
         try {
-            ps= con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, producto.getCodigo());
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
@@ -34,7 +37,7 @@ public class ManejadorProducto extends Conexion {
         } catch (Exception e) {
             System.out.println(e);
             return false;
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -42,49 +45,49 @@ public class ManejadorProducto extends Conexion {
             }
         }
     }
-    
-    public Producto Buscar(String codigoBusqueda){
-        Producto busqueda=null;
-        PreparedStatement statement=null;
-        ResultSet resultado=null;
-        
-        String sql= "SELECT * FROM productos WHERE codigo= ? ";
-        
-        Connection con= getConnection();
+
+    public Producto Buscar(String codigoBusqueda) {
+        Producto busqueda = null;
+        PreparedStatement statement = null;
+        ResultSet resultado = null;
+
+        String sql = "SELECT * FROM productos WHERE codigo= ? ";
+
+        Connection con = getConnection();
         try {
-            statement= con.prepareStatement(sql);
+            statement = con.prepareStatement(sql);
             statement.setString(1, codigoBusqueda);
-            resultado=statement.executeQuery();
-            
+            resultado = statement.executeQuery();
+
             if (resultado.first()) {
-                String codigo=resultado.getString("codigo");
-                String nombre=resultado.getString("nombre");
-                double precio=resultado.getDouble("precio");
-                int cantidad=resultado.getInt("cantidad");
-                java.util.Date date= new Date(resultado.getDate("fechaRegistro").getTime());
-                busqueda= new Producto(codigo, nombre, precio, cantidad, date);
+                String codigo = resultado.getString("codigo");
+                String nombre = resultado.getString("nombre");
+                double precio = resultado.getDouble("precio");
+                int cantidad = resultado.getInt("cantidad");
+                java.util.Date date = new Date(resultado.getDate("fechaRegistro").getTime());
+                busqueda = new Producto(codigo, nombre, precio, cantidad, date);
                 busqueda.setId(resultado.getInt("id"));
             }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
                 System.out.println(e.getErrorCode());
             }
         }
-        
+
         return busqueda;
     }
-    
-    public boolean Editar(Producto producto){
-        PreparedStatement ps=null;
-        String sql="UPDATE productos SET codigo = ? , nombre = ? , precio = ? , cantidad = ? , fechaRegistro= ? WHERE id = ?";
-        Connection con= getConnection();
+
+    public boolean Editar(Producto producto) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE productos SET codigo = ? , nombre = ? , precio = ? , cantidad = ? , fechaRegistro= ? WHERE id = ?";
+        Connection con = getConnection();
         try {
-            ps= con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ps.setString(1, producto.getCodigo());
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
@@ -96,7 +99,7 @@ public class ManejadorProducto extends Conexion {
         } catch (Exception e) {
             System.out.println(e);
             return false;
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -104,25 +107,58 @@ public class ManejadorProducto extends Conexion {
             }
         }
     }
-    
-    public boolean Eliminar(int id){
-        PreparedStatement ps=null;
-        String sql="DELETE FROM productos WHERE id = ?";
-        Connection con= getConnection();
+
+    public boolean Eliminar(int id) {
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM productos WHERE id = ?";
+        Connection con = getConnection();
         try {
-            ps= con.prepareStatement(sql);
-            ps.setInt(1,id);
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
             System.out.println(e);
             return false;
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
                 System.out.println(e.getErrorCode());
             }
         }
+    }
+
+    public ArrayList<Producto> getAllProductos() {
+        ArrayList<Producto> productos = new ArrayList<Producto>();
+
+        Connection c;
+        try {
+            Connection con = getConnection();
+            Statement statement = con.createStatement();
+            String s = "SELECT * FROM productos";
+
+            ResultSet rs = statement.executeQuery(s);
+            int g = 0;
+
+            while (rs.next()) {
+
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                double precio = rs.getDouble("precio");
+                int cantidad = rs.getInt("cantidad");
+                java.util.Date date = new Date(rs.getDate("fechaRegistro").getTime());
+                Producto producto = new Producto(codigo, nombre, precio, cantidad, date);
+                producto.setId(rs.getInt("id"));
+
+                productos.add(producto);
+            }
+
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return productos;
     }
 }
