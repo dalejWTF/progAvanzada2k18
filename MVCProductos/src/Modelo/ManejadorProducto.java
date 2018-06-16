@@ -132,14 +132,12 @@ public class ManejadorProducto extends Conexion {
     public ArrayList<Producto> getAllProductos() {
         ArrayList<Producto> productos = new ArrayList<Producto>();
 
-        Connection c;
         try {
             Connection con = getConnection();
             Statement statement = con.createStatement();
             String s = "SELECT * FROM productos";
 
             ResultSet rs = statement.executeQuery(s);
-            int g = 0;
 
             while (rs.next()) {
 
