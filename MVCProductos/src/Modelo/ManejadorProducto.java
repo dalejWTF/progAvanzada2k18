@@ -13,10 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- *
- * @author dalejwtf
- */
 public class ManejadorProducto extends Conexion {
 
     public static int id;

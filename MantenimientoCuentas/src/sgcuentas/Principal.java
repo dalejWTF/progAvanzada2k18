@@ -11,7 +11,7 @@ import GUI.frmMantenimientoCuentas;
  *
  * @author dalejwtf
  */
-public class SGCuentas {
+public class Principal {
 
     /**
      * @param args the command line arguments

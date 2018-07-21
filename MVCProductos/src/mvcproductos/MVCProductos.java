@@ -10,10 +10,6 @@ import Modelo.ManejadorProducto;
 import Modelo.Producto;
 import Vista.frmProducto;
 
-/**
- *
- * @author dalejwtf
- */
 public class MVCProductos {
 
     /**

@@ -260,7 +260,7 @@ public class frmEmpleado extends javax.swing.JFrame {
 
     private void jbtnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnEliminarMouseClicked
 
-        int aux = (Integer) jtblEmp.getValueAt(jtblEmp.getSelectedRow(), 0);
+        Integer aux= new Integer(selectedRow);
 
         try {
             ControladorEmp.destroy(aux);
@@ -272,20 +272,25 @@ public class frmEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnEliminarMouseClicked
 
     private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
-        try {
+        
             Empleado emp = new Empleado();
-            int aux = (Integer) jtblEmp.getValueAt(jtblEmp.getSelectedRow(), 0);
-            emp.setIdEmpleado(aux);
+            Integer c= new Integer(selectedRow);
+            System.out.println("fila: "+ c);
+            emp.setIdEmpleado(c);
             emp.setCedula(jtxtfCedula.getText());
             emp.setApellidos(jtxtfApellidos.getText());
             emp.setNombres(jtxtfNombres.getText());
             emp.setEdad(Integer.parseInt(jtxtfEdad.getText()));
             emp.setSueldo(Long.parseLong(jtxtfSueldo.getText()));
+        try {
             ControladorEmp.edit(emp);
-            JOptionPane.showMessageDialog(null, "Datos Modificados");
             CargarInf();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            Logger.getLogger(frmEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
+            JOptionPane.showMessageDialog(null, "Datos Modificados");
+            
+        
     }//GEN-LAST:event_jbtnModificarActionPerformed
 
     private void jtblEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEmpMouseClicked

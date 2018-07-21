@@ -7,10 +7,7 @@ package Modelo;
 
 import java.sql.*;
 
-/**
- *
- * @author dalejwtf
- */
+
 public class Conexion {
     private final String base="datos";
     private final String usuario="utpl";

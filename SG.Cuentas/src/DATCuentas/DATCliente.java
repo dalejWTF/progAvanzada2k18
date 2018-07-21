@@ -23,7 +23,13 @@ public class DATCliente extends ConnectionMySQL {
 
     public ResultSet getCLienteCed(String cedula) throws ClassNotFoundException, SQLException {
         Connection conecta = getConnection();
-        String sql = "SELECT c.cedula, c.apellidos,c.nombres,c.fecha_nacimiento, pr.provincia provincia_res, cr.canton canton_res, c.calle_res, pt.provincia provincia_tra, ct.canton canton_tra, c.calle_tra, c.id_cliente, c.provincia_res, c.canton_res FROM cliente c,provincias pr, canton cr, provincias pt, canton ct WHERE c.provincia_res = pr.id_provincia AND c.canton_res = cr.id_canton AND  c.provincia_tra = pt.id_provincia AND c.canton_tra = ct.id_canton AND c.cedula=" + cedula;
+        String sql = "SELECT c.cedula, c.apellidos,c.nombres,c.fecha_nacimiento, "
+                + "pr.provincia provincia_res, cr.canton canton_res, c.calle_res,"
+                + " pt.provincia provincia_tra, ct.canton canton_tra, c.calle_tra, "
+                + "c.id_cliente, c.provincia_res, c.canton_res FROM cliente c,provincias pr,"
+                + " canton cr, provincias pt, canton ct "
+                + "WHERE c.provincia_res = pr.id_provincia AND c.canton_res = cr.id_canton"
+                + " AND  c.provincia_tra = pt.id_provincia AND c.canton_tra = ct.id_canton AND c.cedula=" + cedula;
         Statement st = conecta.createStatement();
         ResultSet rs = st.executeQuery(sql);
         return rs;

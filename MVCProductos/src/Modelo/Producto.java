@@ -7,10 +7,6 @@ package Modelo;
 
 import java.util.Date;
 
-/**
- *
- * @author dalejwtf
- */
 public class Producto {
 
     private String codigo;
